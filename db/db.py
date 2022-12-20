@@ -68,3 +68,19 @@ def delete_expense(message: types.Message) -> str:
         con.commit()
         return "Трата удалена"
     return "Вы не имеете права удалять чужие траты"
+
+def month_expenses(from_id: int) -> str:
+    res = [0 for i in range(len(CATEGORIES))]
+    expenses = cur.execute(f'''SELECT category_id, amount FROM expenses
+                               WHERE user_id = {from_id} AND time LIKE "%-{dt.now().month}-%"
+                               ORDER BY category_id DESC''').fetchall()
+
+    for expense in expenses:
+        res[expense[0] - 1] += expense[1]
+    
+    for i, cat in enumerate(CATEGORIES):
+        res[i] = f"{cat.capitalize()}: {res[i]}"
+    
+    return "Ваша статистика за месяц:\n\n" + "\n".join(res)
+    
+        

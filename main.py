@@ -34,6 +34,10 @@ async def today(message: types.Message):
 @dp.message_handler(commands=["expenses"])
 async def today(message: types.Message):
     await message.answer(db.last_expenses(message.from_id))
+
+@dp.message_handler(commands=["month"])
+async def month(message: types.Message):
+    await message.answer(db.month_expenses(message.from_id))
     
 @dp.message_handler(lambda message: message.text.startswith("/del"))
 async def del_expense(message: types.Message):
