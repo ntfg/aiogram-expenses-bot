@@ -53,7 +53,7 @@ def last_expenses(from_id: int) -> str:
     expenses = cur.execute(f'''SELECT id, category_id, amount FROM expenses
                                WHERE user_id = {from_id} ORDER BY id DESC LIMIT 5''').fetchall()
     res = [f"{RCATEGORIES[expense[1]].capitalize()}: {expense[2]}\nУдалить: /del{expense[0]}\n" for expense in expenses]
-    return "\n".join(res)
+    return "\n".join(res) if len(res) > 0 else "У вас нет трат"
 
 def delete_expense(message: types.Message) -> str:
     id = message.text[4:]
