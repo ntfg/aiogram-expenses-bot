@@ -1,5 +1,4 @@
 from data import config
-from middlewares.middlewares import Is_Avaible_Middleware
 from db import db
 
 from aiogram import Bot, Dispatcher, executor, types
