@@ -6,8 +6,6 @@ from aiogram import Bot, Dispatcher, executor, types
 
 bot = Bot(token=config.TOKEN)
 dp = Dispatcher(bot)
-dp.middleware.setup(Is_Avaible_Middleware(config.AVAIBLE_USERS))
-
 
 @dp.message_handler(commands=["start", "help"])
 async def send_welcome(message: types.Message):
