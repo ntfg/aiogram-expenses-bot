@@ -24,7 +24,7 @@ def add_expence(expense: types.Message) -> str:
                         VALUES ({CATEGORIES[message[1]]}, {expense.from_id}, DATETIME(), {message[0]})""")
         con.commit()
         return "Трата успешно добавлена!"
-    return "В вашем запросе ошибка"
+    return "В вашем запросе ошибка\nДля добавления новой траты: *сумма* *категория*"
     
 def _parse_expense(expense: str) -> tuple[float, int]:
     expense = expense.split()
